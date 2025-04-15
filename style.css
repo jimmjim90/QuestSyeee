@@ -8,12 +8,13 @@
     --background-color: #0a0a0a; /* Near black */
     --panel-background: #1a1a1a; /* Dark grey */
     --text-color: #e0e0e0; /* Light grey */
-    --primary-accent: #8A2BE2; /* Violet */
-    --secondary-accent: #DC143C; /* Crimson Red */
-    --glow-color-primary: rgba(138, 43, 226, 0.7);
-    --glow-color-secondary: rgba(220, 20, 60, 0.7);
+    --primary-accent: #4DFFFF; /* Cyan/Electric Blue - More System-like */
+    --secondary-accent: #FF4500; /* OrangeRed - For alerts/contrast */
+    --glow-color-primary: rgba(77, 255, 255, 0.7);
+    --glow-color-secondary: rgba(255, 69, 0, 0.7);
+    --xp-bar-color: var(--primary-accent);
     --font-family: 'Share Tech Mono', monospace;
-    --border-radius: 5px;
+    --border-radius: 3px; /* Sharper edges */
     --panel-padding: 20px;
     --panel-margin: 15px;
     --transition-speed: 0.3s;
@@ -36,19 +37,21 @@ body {
     align-items: flex-start; /* Align to top */
     min-height: 100vh;
     padding: 20px;
-    background-image: radial-gradient(circle at top left, var(--glow-color-primary), transparent 40%),
-                      radial-gradient(circle at bottom right, var(--glow-color-secondary), transparent 40%);
+    background-image:
+        linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.8)), /* Dark overlay */
+        radial-gradient(circle at top left, var(--glow-color-primary), transparent 50%),
+        radial-gradient(circle at bottom right, var(--glow-color-secondary), transparent 50%);
     background-attachment: fixed;
 }
 
 .container {
     width: 100%;
     max-width: 800px; /* Limit max width */
-    background: rgba(10, 10, 10, 0.8); /* Slightly transparent background */
+    background: rgba(15, 15, 15, 0.85); /* Slightly darker, less transparent */
     border: 1px solid var(--primary-accent);
     border-radius: var(--border-radius);
-    box-shadow: 0 0 15px var(--glow-color-primary), 0 0 25px var(--glow-color-secondary) inset;
-    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px var(--glow-color-primary), 0 0 15px var(--glow-color-secondary) inset;
+    backdrop-filter: blur(3px);
     padding: var(--panel-padding);
     animation: fadeIn 1s ease-in-out;
 }
@@ -67,30 +70,56 @@ header {
 
 header h1 {
     color: var(--primary-accent);
-    text-shadow: 0 0 5px var(--glow-color-primary);
-    margin-bottom: 10px;
+    text-shadow: 0 0 8px var(--glow-color-primary);
+    margin-bottom: 15px; /* Increased margin */
     font-size: 1.8em;
+    letter-spacing: 2px; /* Added letter spacing */
 }
 
+/* Updated Stats Panel */
 .stats-panel {
-    background: rgba(26, 26, 26, 0.7); /* Darker panel */
-    padding: 10px;
+    background: rgba(26, 26, 26, 0.8); /* Darker panel */
+    padding: 15px; /* Increased padding */
     border-radius: var(--border-radius);
-    border: 1px solid var(--secondary-accent);
-    display: flex;
-    justify-content: space-around;
-    font-size: 0.9em;
+    border: 1px solid var(--primary-accent); /* Changed border color */
+    display: grid; /* Use grid for better layout */
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive columns */
+    gap: 10px; /* Space between grid items */
+    font-size: 1em; /* Slightly larger font */
     margin-top: 10px;
+    text-align: center; /* Center text in grid cells */
 }
 
-.stats-panel span {
+.stats-panel div { /* Style individual stat items */
     color: var(--text-color);
+    padding: 5px;
 }
 
-.stats-panel span span { /* The actual count numbers */
-     color: var(--secondary-accent);
+.stats-panel span { /* The actual count numbers */
+     color: var(--primary-accent); /* Changed color */
      font-weight: bold;
 }
+
+/* XP Bar Styles */
+.xp-bar-container {
+    background-color: #333; /* Dark background for the bar */
+    border-radius: var(--border-radius);
+    height: 15px; /* Height of the bar */
+    overflow: hidden; /* Hide overflow */
+    border: 1px solid var(--secondary-accent);
+    grid-column: 1 / -1; /* Span full width in grid */
+    margin-top: 5px; /* Space above */
+}
+
+.xp-bar-fill {
+    height: 100%;
+    width: 0%; /* Start empty, JS will update */
+    background-color: var(--xp-bar-color);
+    border-radius: var(--border-radius);
+    transition: width var(--transition-speed) ease-out; /* Smooth transition */
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
 
 main {
     padding: 0; /* No extra padding needed */
@@ -102,7 +131,7 @@ main {
     border-radius: var(--border-radius);
     padding: var(--panel-padding);
     margin-bottom: var(--panel-margin);
-    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 0 8px rgba(77, 255, 255, 0.3); /* Updated glow */
     transition: all var(--transition-speed) ease;
 }
 
@@ -112,6 +141,7 @@ main {
     padding-bottom: 10px;
     margin-bottom: 15px;
     font-size: 1.4em;
+    letter-spacing: 1px; /* Added spacing */
 }
 
 .panel h3 {
@@ -144,7 +174,7 @@ main {
     width: 100%;
     padding: 10px;
     background-color: #2a2a2a; /* Slightly lighter dark */
-    border: 1px solid var(--secondary-accent);
+    border: 1px solid var(--primary-accent); /* Changed border */
     border-radius: var(--border-radius);
     color: var(--text-color);
     font-family: var(--font-family);
@@ -164,7 +194,7 @@ main {
     display: block;
     margin-top: 5px;
     font-size: 0.8em;
-    color: #aaa; /* Dim color for notes */
+    color: #888; /* Dimmer color for notes */
 }
 
 /* Button Styling */
@@ -174,12 +204,14 @@ button {
     border: 1px solid var(--primary-accent);
     border-radius: var(--border-radius);
     background: linear-gradient(45deg, var(--secondary-accent), var(--primary-accent));
-    color: #fff; /* White text on buttons */
+    color: #000; /* Black text on buttons for contrast */
     cursor: pointer;
     transition: all var(--transition-speed) ease;
     font-size: 1em;
     margin-right: 10px; /* Space between buttons */
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 3px rgba(255, 255, 255, 0.5); /* Lighter shadow */
+    font-weight: bold; /* Bolder text */
+    letter-spacing: 1px;
 }
 
 button:hover {
@@ -195,50 +227,78 @@ button:active {
 
 #cancel-quest-btn, /* Specific styling for cancel/abort */
 .close-btn {
-    background: #555; /* Grey background */
-    border-color: #777;
+    background: #444; /* Darker Grey background */
+    border-color: #666;
+    color: #ccc; /* Lighter text */
 }
 
 #cancel-quest-btn:hover,
 .close-btn:hover {
-     background: #777;
+     background: #666;
      box-shadow: 0 0 10px rgba(150, 150, 150, 0.5);
 }
 
-/* Message Box */
+/* Message Box - System Alert Style */
 .message-box {
     padding: 15px;
     margin-bottom: var(--panel-margin);
     border-radius: var(--border-radius);
-    text-align: center;
+    text-align: left; /* Align left like logs */
     font-weight: bold;
     transition: all var(--transition-speed) ease;
+    border-left: 5px solid; /* Add a colored left border */
+    position: relative; /* For pseudo-element */
+}
+
+.message-box::before { /* Add "[System Alert]" prefix */
+    content: "[System Alert] ";
+    font-weight: bold;
+    margin-right: 5px;
 }
 
 .message-box.success {
-    background-color: rgba(43, 138, 64, 0.8); /* Greenish */
-    border: 1px solid #2BE253;
-    color: #fff;
-    animation: levelUpEffect 0.5s ease-in-out;
+    background-color: rgba(77, 255, 150, 0.1); /* Faint green */
+    border-left-color: #4DFF96; /* Bright Green */
+    color: #4DFF96;
 }
+.message-box.success::before { color: #4DFF96; }
+
 
 .message-box.error {
-    background-color: rgba(220, 20, 60, 0.8); /* Reddish */
-    border: 1px solid var(--secondary-accent);
-    color: #fff;
+    background-color: rgba(255, 69, 0, 0.1); /* Faint red */
+    border-left-color: var(--secondary-accent);
+    color: var(--secondary-accent);
 }
+.message-box.error::before { color: var(--secondary-accent); }
 
 .message-box.info {
-    background-color: rgba(60, 60, 150, 0.8); /* Bluish */
-    border: 1px solid #532BE2;
+    background-color: rgba(77, 255, 255, 0.1); /* Faint cyan */
+    border-left-color: var(--primary-accent);
+    color: var(--primary-accent);
+}
+.message-box.info::before { color: var(--primary-accent); }
+
+/* Level Up Box */
+.level-up-box {
+    padding: 20px;
+    margin-bottom: var(--panel-margin);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
     color: #fff;
+    background: linear-gradient(45deg, var(--primary-accent), var(--secondary-accent));
+    border: 2px solid #fff;
+    box-shadow: 0 0 25px var(--glow-color-primary), 0 0 35px var(--glow-color-secondary);
+    text-shadow: 0 0 10px #000;
+    animation: levelUpPulse 1.5s ease-in-out infinite;
+    display: none; /* Hidden by default */
 }
 
-/* Level Up Animation */
-@keyframes levelUpEffect {
-    0% { transform: scale(1); box-shadow: 0 0 5px var(--glow-color-primary); }
-    50% { transform: scale(1.03); box-shadow: 0 0 25px var(--glow-color-primary), 0 0 15px #fff; }
-    100% { transform: scale(1); box-shadow: 0 0 5px var(--glow-color-primary); }
+@keyframes levelUpPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 /* Witness Section */
@@ -274,7 +334,7 @@ button:active {
     width: 100%;
     height: 100%;
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+    background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
     backdrop-filter: blur(5px);
     animation: fadeInModal 0.5s ease;
 }
@@ -348,19 +408,18 @@ footer {
         font-size: 1.5em;
     }
     .stats-panel {
-        font-size: 0.8em;
-        flex-direction: column;
-        align-items: center;
+        font-size: 0.9em; /* Adjusted font size */
+        grid-template-columns: 1fr 1fr; /* Simpler 2-column layout */
     }
-     .stats-panel span {
-         margin-bottom: 5px;
+     .xp-bar-container {
+         grid-column: 1 / -1; /* Ensure XP bar spans full width */
      }
     .panel {
         padding: 15px;
     }
     button {
-        padding: 8px 15px;
-        font-size: 0.9em;
+        padding: 10px 15px; /* Slightly larger padding */
+        font-size: 1em; /* Ensure button text is readable */
         width: 100%; /* Make buttons full width */
         margin-bottom: 10px; /* Add space below buttons */
         margin-right: 0;
@@ -371,5 +430,8 @@ footer {
     .modal-content {
         width: 90%;
         margin: 20% auto;
+    }
+    .level-up-box {
+        font-size: 1.5em; /* Smaller font on mobile */
     }
 }
