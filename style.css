@@ -1,0 +1,375 @@
+/* style.css */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+/* CSS Variables for Theming */
+:root {
+    --background-color: #0a0a0a; /* Near black */
+    --panel-background: #1a1a1a; /* Dark grey */
+    --text-color: #e0e0e0; /* Light grey */
+    --primary-accent: #8A2BE2; /* Violet */
+    --secondary-accent: #DC143C; /* Crimson Red */
+    --glow-color-primary: rgba(138, 43, 226, 0.7);
+    --glow-color-secondary: rgba(220, 20, 60, 0.7);
+    --font-family: 'Share Tech Mono', monospace;
+    --border-radius: 5px;
+    --panel-padding: 20px;
+    --panel-margin: 15px;
+    --transition-speed: 0.3s;
+}
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    min-height: 100vh;
+    padding: 20px;
+    background-image: radial-gradient(circle at top left, var(--glow-color-primary), transparent 40%),
+                      radial-gradient(circle at bottom right, var(--glow-color-secondary), transparent 40%);
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px; /* Limit max width */
+    background: rgba(10, 10, 10, 0.8); /* Slightly transparent background */
+    border: 1px solid var(--primary-accent);
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 15px var(--glow-color-primary), 0 0 25px var(--glow-color-secondary) inset;
+    backdrop-filter: blur(5px);
+    padding: var(--panel-padding);
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+header {
+    text-align: center;
+    margin-bottom: var(--panel-margin);
+    border-bottom: 1px dashed var(--secondary-accent);
+    padding-bottom: var(--panel-padding);
+}
+
+header h1 {
+    color: var(--primary-accent);
+    text-shadow: 0 0 5px var(--glow-color-primary);
+    margin-bottom: 10px;
+    font-size: 1.8em;
+}
+
+.stats-panel {
+    background: rgba(26, 26, 26, 0.7); /* Darker panel */
+    padding: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--secondary-accent);
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.stats-panel span {
+    color: var(--text-color);
+}
+
+.stats-panel span span { /* The actual count numbers */
+     color: var(--secondary-accent);
+     font-weight: bold;
+}
+
+main {
+    padding: 0; /* No extra padding needed */
+}
+
+.panel {
+    background-color: var(--panel-background);
+    border: 1px solid var(--primary-accent);
+    border-radius: var(--border-radius);
+    padding: var(--panel-padding);
+    margin-bottom: var(--panel-margin);
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+    transition: all var(--transition-speed) ease;
+}
+
+.panel h2 {
+    color: var(--primary-accent);
+    border-bottom: 1px solid var(--secondary-accent);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.panel h3 {
+    color: var(--secondary-accent);
+    margin-bottom: 10px;
+}
+
+.panel p {
+    margin-bottom: 10px;
+}
+
+.panel strong {
+    color: var(--primary-accent);
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-accent);
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #2a2a2a; /* Slightly lighter dark */
+    border: 1px solid var(--secondary-accent);
+    border-radius: var(--border-radius);
+    color: var(--text-color);
+    font-family: var(--font-family);
+    font-size: 1em;
+}
+
+.form-group input[type="file"] {
+    padding: 5px; /* Adjust padding for file input */
+}
+
+.form-group textarea {
+    resize: vertical; /* Allow vertical resize */
+    min-height: 100px;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #aaa; /* Dim color for notes */
+}
+
+/* Button Styling */
+button {
+    font-family: var(--font-family);
+    padding: 10px 20px;
+    border: 1px solid var(--primary-accent);
+    border-radius: var(--border-radius);
+    background: linear-gradient(45deg, var(--secondary-accent), var(--primary-accent));
+    color: #fff; /* White text on buttons */
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    font-size: 1em;
+    margin-right: 10px; /* Space between buttons */
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+button:hover {
+    box-shadow: 0 0 15px var(--glow-color-primary);
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+    filter: brightness(1);
+}
+
+#cancel-quest-btn, /* Specific styling for cancel/abort */
+.close-btn {
+    background: #555; /* Grey background */
+    border-color: #777;
+}
+
+#cancel-quest-btn:hover,
+.close-btn:hover {
+     background: #777;
+     box-shadow: 0 0 10px rgba(150, 150, 150, 0.5);
+}
+
+/* Message Box */
+.message-box {
+    padding: 15px;
+    margin-bottom: var(--panel-margin);
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: bold;
+    transition: all var(--transition-speed) ease;
+}
+
+.message-box.success {
+    background-color: rgba(43, 138, 64, 0.8); /* Greenish */
+    border: 1px solid #2BE253;
+    color: #fff;
+    animation: levelUpEffect 0.5s ease-in-out;
+}
+
+.message-box.error {
+    background-color: rgba(220, 20, 60, 0.8); /* Reddish */
+    border: 1px solid var(--secondary-accent);
+    color: #fff;
+}
+
+.message-box.info {
+    background-color: rgba(60, 60, 150, 0.8); /* Bluish */
+    border: 1px solid #532BE2;
+    color: #fff;
+}
+
+/* Level Up Animation */
+@keyframes levelUpEffect {
+    0% { transform: scale(1); box-shadow: 0 0 5px var(--glow-color-primary); }
+    50% { transform: scale(1.03); box-shadow: 0 0 25px var(--glow-color-primary), 0 0 15px #fff; }
+    100% { transform: scale(1); box-shadow: 0 0 5px var(--glow-color-primary); }
+}
+
+/* Witness Section */
+.witness-section {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--secondary-accent);
+}
+.witness-section h4{
+    color: var(--secondary-accent);
+    margin-bottom: 10px;
+}
+#witness-status {
+    margin-top: 10px;
+    font-style: italic;
+    color: #aaa;
+}
+
+/* Cooldown/Timer Display */
+#quest-timer, #cooldown-message p {
+    margin-top: 15px;
+    font-size: 1.1em;
+    color: var(--secondary-accent);
+}
+
+/* Modal Styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+    backdrop-filter: blur(5px);
+    animation: fadeInModal 0.5s ease;
+}
+
+@keyframes fadeInModal {
+     from { opacity: 0; }
+     to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--panel-background);
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: var(--panel-padding);
+    border: 1px solid var(--primary-accent);
+    border-radius: var(--border-radius);
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 600px;
+    box-shadow: 0 5px 25px var(--glow-color-primary);
+}
+
+.modal-content h2 {
+     color: var(--primary-accent);
+     margin-bottom: 15px;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+}
+.modal-content .reflection-question {
+    font-style: italic;
+    color: var(--secondary-accent);
+    margin-bottom: 15px;
+}
+
+.close-btn {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--secondary-accent);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    margin-top: var(--panel-margin);
+    padding-top: var(--panel-padding);
+    border-top: 1px dashed var(--secondary-accent);
+    font-size: 0.8em;
+    color: #888; /* Dim footer text */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+    header h1 {
+        font-size: 1.5em;
+    }
+    .stats-panel {
+        font-size: 0.8em;
+        flex-direction: column;
+        align-items: center;
+    }
+     .stats-panel span {
+         margin-bottom: 5px;
+     }
+    .panel {
+        padding: 15px;
+    }
+    button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+        width: 100%; /* Make buttons full width */
+        margin-bottom: 10px; /* Add space below buttons */
+        margin-right: 0;
+    }
+    button:last-of-type {
+        margin-bottom: 0;
+    }
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+    }
+}
